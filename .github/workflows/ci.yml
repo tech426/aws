@@ -1,0 +1,12 @@
+name: CI – Lint
+on: { pull_request: { branches: [ "main" ] } }
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 20 }
+      - run: npm i -D htmlhint markdownlint-cli
+      - run: npx htmlhint "**/*.html"
+      - run: npx markdownlint "**/*.md"
